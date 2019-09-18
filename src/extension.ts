@@ -10,20 +10,20 @@ function evaluate(input: string, n: number, proca_path: string)
 	return BigInt(result.toString());
 }
 
-export function activate(context: vscode.ExtensionContext) 
+export function activate(context: vscode.ExtensionContext)
 {
-	let disposable = vscode.commands.registerCommand('procapy.calculate.decimal', () => 
+	let disposable = vscode.commands.registerCommand('procapy.calculate.decimal', () =>
 	{
 		const path = require("path");
-		let proca_path = path.join(context.extensionPath, "src", "proca.py");		
-		
+		let proca_path = path.join(context.extensionPath, "src", "proca.py");
+
 		let editor = vscode.window.activeTextEditor;
-		if (editor) 
+		if (editor)
 		{
 			const selections: vscode.Selection[] = editor.selections;
 			const document: vscode.TextDocument = editor.document;
 			editor.edit(
-				function (builder) 
+				function (builder)
 				{
 					let n = 0;
 					for (const selection of selections)
@@ -35,7 +35,7 @@ export function activate(context: vscode.ExtensionContext)
 					}
 				}
 			);
-		}		
+		}
 	});
 	context.subscriptions.push(disposable);
 }
