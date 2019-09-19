@@ -104,6 +104,10 @@ Rounding:
  * "round(4.51)"
    * Decimal: "5"
 
+## Acknowledgements
+
+Icon designed by Freepik from Flaticon
+
 ## Known Issues
 
  * Just calls "python" (TODO: find a suitable python or make it possible to select)
@@ -111,12 +115,18 @@ Rounding:
 
 ## Release Notes
 
-### 0.0.1
+### 0.0.3
 
-Initial release of Procapy
+ * Add icon by Freepik from Flaticon
 
 ### 0.0.2
 
  * Support hex/binary/octal
  * Add keybindings
  * Handle syntax errors from Python
+
+### 0.0.1
+
+Initial release of Procapy
+
+
