@@ -7,7 +7,7 @@
 		"type": "git",
 		"url": "https://github.com/thomasthorsen/vscode-procapy"
 	},
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"engines": {
 		"vscode": "^1.35.0"
 	},
@@ -15,14 +15,57 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:procapy.calculate.decimal"
+		"onCommand:procapy.calculate.decimal",
+		"onCommand:procapy.calculate.hex",
+		"onCommand:procapy.calculate.binary",
+		"onCommand:procapy.calculate.octal"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
-		"commands": [{
-			"command": "procapy.calculate.decimal",
-			"title": "Calculate decimal"
-		}]
+		"keybindings": [
+			{
+				"command": "procapy.calculate.decimal",
+				"key": "alt+enter",
+				"when": "editorTextFocus && !findWidgetVisible"
+			},
+			{
+				"command": "procapy.calculate.hex",
+				"key": "ctrl+alt+enter",
+				"when": "editorTextFocus && !findWidgetVisible"
+			},
+			{
+				"command": "procapy.calculate.binary",
+				"key": "shift+alt+enter",
+				"when": "editorTextFocus && !findWidgetVisible"
+			},
+			{
+				"command": "procapy.calculate.octal",
+				"key": "ctrl+shift+alt+enter",
+				"when": "editorTextFocus && !findWidgetVisible"
+			}
+		],
+		"commands": [
+			{
+				"command": "procapy.calculate.decimal",
+				"title": "Calculate decimal",
+				"category": "Procapy"
+			},
+			{
+				"command": "procapy.calculate.hex",
+				"title": "Calculate hex",
+				"category": "Procapy"
+			},
+			{
+				"command": "procapy.calculate.binary",
+				"title": "Calculate binary",
+				"category": "Procapy"
+			},
+			{
+				"command": "procapy.calculate.octal",
+				"title": "Calculate octal",
+				"category": "Procapy"
+			}
+		]
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",

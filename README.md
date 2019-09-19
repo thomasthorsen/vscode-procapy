@@ -10,10 +10,10 @@ Procapy supports any valid Python, and will reduce the result of any expression 
 
 The default keyboard shortcuts are:
 
- * ALT-ENTER: Calculate decimal
- * CRTL-ALT-ENTER: Calculate hexadecimal
- * SHIFT-ALT-ENTER: Calculate binary
- * SHIFT-CTRL-ALT-ENTER: Calculate octal
+ * Alt-Enter: Calculate decimal
+ * Ctrl-Alt-Enter: Calculate hex
+ * Shift-Alt-Enter: Calculate binary
+ * Shift-Ctrl-Alt-Enter: Calculate octal
 
 ## Built-in functions
 
@@ -107,12 +107,16 @@ Rounding:
 ## Known Issues
 
  * Just calls "python" (TODO: find a suitable python or make it possible to select)
- * Only supports decimal output (TODO: add hex/octal/binary)
- * No keybindings (TODO: add key bindings)
- * Not handling errors correctly (TODO: replace selection with error for calculation)
+ * Not extending selection to full line when there is no selection
 
 ## Release Notes
 
 ### 0.0.1
 
 Initial release of Procapy
+
+### 0.0.2
+
+ * Support hex/binary/octal
+ * Add keybindings
+ * Handle syntax errors from Python
