@@ -1,18 +1,18 @@
 
 import * as vscode from 'vscode';
 
-function evaluate(input: string, radix: string, n: number, proca_path: string)
+function evaluate(input: string, radix: string, n: number, proca_path: string, python_path: string)
 {
     const cp = require('child_process');
     input = input.replace(/\bn\b/g, n.toString());
-    let cmd = 'python "' + proca_path + '" ' + radix + ' "' + input + '"';
-    let result = cp.execSync(cmd);
+    let result = cp.execFileSync(python_path, [proca_path, radix, input]);
     return result.toString();
 }
 
 function process(radix: string, proca_path: string)
 {
     let editor = vscode.window.activeTextEditor;
+    let python_path = vscode.workspace.getConfiguration('python').get('pythonPath', 'python');
     if (editor)
     {
         const selections: vscode.Selection[] = editor.selections;
@@ -24,7 +24,7 @@ function process(radix: string, proca_path: string)
                 for (const selection of selections)
                 {
                     let expression = document.getText(selection);
-                    let result = evaluate(expression, radix, n, proca_path);
+                    let result = evaluate(expression, radix, n, proca_path, python_path);
                     n += 1;
                     builder.replace(selection, result);
                 }
