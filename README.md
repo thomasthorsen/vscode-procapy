@@ -108,11 +108,11 @@ Rounding:
 
 Icon designed by Freepik from Flaticon
 
-## Known Issues
-
- * Not extending selection to full line when there is no selection
-
 ## Release Notes
+
+### 1.0.0
+
+ * Extend selection to full line when there is no selection
 
 ### 0.1.0
 

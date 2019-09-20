@@ -1,5 +1,6 @@
 
 import * as vscode from 'vscode';
+import { stringify } from 'querystring';
 
 function evaluate(input: string, radix: string, n: number, proca_path: string, python_path: string)
 {
@@ -13,6 +14,7 @@ function process(radix: string, proca_path: string)
 {
     let editor = vscode.window.activeTextEditor;
     let python_path = vscode.workspace.getConfiguration('python', null).get('pythonPath', 'python');
+
     if (editor)
     {
         const selections: vscode.Selection[] = editor.selections;
@@ -23,10 +25,25 @@ function process(radix: string, proca_path: string)
                 let n = 0;
                 for (const selection of selections)
                 {
-                    let expression = document.getText(selection);
-                    let result = evaluate(expression, radix, n, proca_path, python_path);
+                    if (!selection.isEmpty)
+                    {
+                        let expression = document.getText(selection).trim();
+                        if (selection.isSingleLine && expression.length > 0)
+                        {
+                            let result = evaluate(expression, radix, n, proca_path, python_path);
+                            builder.replace(selection, result);
+                        }
+                    }
+                    else
+                    {
+                        let line = document.lineAt(selection.active.line);
+                        if (!line.isEmptyOrWhitespace)
+                        {
+                            let result = evaluate(line.text, radix, n, proca_path, python_path);
+                            builder.insert(line.range.end, '\n' + result);
+                        }
+                    }
                     n += 1;
-                    builder.replace(selection, result);
                 }
             }
         );
