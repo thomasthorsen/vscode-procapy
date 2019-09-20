@@ -12,7 +12,7 @@ function evaluate(input: string, radix: string, n: number, proca_path: string, p
 function process(radix: string, proca_path: string)
 {
     let editor = vscode.window.activeTextEditor;
-    let python_path = vscode.workspace.getConfiguration('python').get('pythonPath', 'python');
+    let python_path = vscode.workspace.getConfiguration('python', null).get('pythonPath', 'python');
     if (editor)
     {
         const selections: vscode.Selection[] = editor.selections;
@@ -36,7 +36,7 @@ function process(radix: string, proca_path: string)
 export function activate(context: vscode.ExtensionContext)
 {
     const path = require("path");
-    let proca_path = path.join(context.extensionPath, "src", "proca.py");
+    let proca_path = path.join(context.extensionPath, "proca.py");
 
     context.subscriptions.push(
         vscode.commands.registerCommand(

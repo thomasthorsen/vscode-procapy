@@ -110,10 +110,14 @@ Icon designed by Freepik from Flaticon
 
 ## Known Issues
 
- * Just calls "python" (TODO: find a suitable python or make it possible to select)
  * Not extending selection to full line when there is no selection
 
 ## Release Notes
+
+### 0.1.0
+
+ * Acquire path to Python from the Python extension configuration
+ * Move proca.py script to a location that is included in release package
 
 ### 0.0.3
 
