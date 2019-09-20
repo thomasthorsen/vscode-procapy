@@ -1,6 +1,5 @@
 
 import * as vscode from 'vscode';
-import { stringify } from 'querystring';
 
 function evaluate(input: string, radix: string, n: number, proca_path: string, python_path: string)
 {
