@@ -27,7 +27,7 @@ function process(radix: string, proca_path: string)
                     if (!selection.isEmpty)
                     {
                         let expression = document.getText(selection).trim();
-                        if (selection.isSingleLine && expression.length > 0)
+                        if (expression.length > 0)
                         {
                             let result = evaluate(expression, radix, n, proca_path, python_path);
                             builder.replace(selection, result);

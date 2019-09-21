@@ -4,6 +4,7 @@ from __future__ import print_function
 from math import *
 import cmath
 import sys
+import ast
 
 # Truncation to arbitrary width unsigned integer
 def u(width, value):
@@ -33,17 +34,24 @@ def i64(value):
     return i(64, value)
 
 try:
-    result = eval(" ".join(sys.argv[2:]))
-    radix = sys.argv[1]
-    if radix == "hex":
-        result = hex(int(result))
-    if radix == "binary":
-        result = bin(int(result))
-    if radix == "octal":
-        result = oct(int(result))
-    result = str(result)
+    program = " ".join(sys.argv[2:])
+    code_block = ast.parse(program)
+    ends_with_expression = isinstance(code_block.body[-1], ast.Expr)
+    if ends_with_expression:
+        expression = ast.Expression(code_block.body.pop().value)
+        exec(compile(code_block, filename='<procapy>', mode='exec'))
+        result = eval(compile(expression, filename='<procapy>', mode='eval'))
+        if result is not None:
+            radix = sys.argv[1]
+            if radix == "hex":
+                result = hex(int(result))
+            if radix == "binary":
+                result = bin(int(result))
+            if radix == "octal":
+                result = oct(int(result))
+            result = str(result)
+            print(result, end='')
+    else:
+        exec(program)
 except:
-    result = sys.exc_info()[0].__name__ + ": " + str(sys.exc_info()[1])
-
-# Print result as decimal
-print(result, end="")
+    print(sys.exc_info()[0].__name__ + ": " + str(sys.exc_info()[1]), end='')
