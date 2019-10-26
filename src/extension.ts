@@ -9,12 +9,36 @@ function evaluate(input: string, radix: string, n: number, proca_path: string, p
     return result.toString();
 }
 
+function get_python_path()
+{
+    const cp = require('child_process');
+    var python_paths: string[] = ['python3', 'python'];
+    let python_configured_path = vscode.workspace.getConfiguration('python', null).get('pythonPath');
+    if (typeof python_configured_path === "string")
+    {
+        python_paths.unshift(python_configured_path);
+    }
+    for (var python_path of python_paths)
+    {
+        try
+        {
+            cp.execFileSync(python_path, ['--version']);
+            return python_path;
+        }
+        catch (e) {}
+    }
+    vscode.window.showErrorMessage(
+        'Python executable not found, make sure "python3" or "python" is in the path, ' +
+        'or install the Python extension to define a custom location of python.');
+    return '';
+}
+
 function process(radix: string, proca_path: string)
 {
     let editor = vscode.window.activeTextEditor;
-    let python_path = vscode.workspace.getConfiguration('python', null).get('pythonPath', 'python');
+    let python_path = get_python_path();
 
-    if (editor)
+    if (editor && python_path !== '')
     {
         const selections: vscode.Selection[] = editor.selections;
         const document: vscode.TextDocument = editor.document;

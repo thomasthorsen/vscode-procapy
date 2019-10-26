@@ -110,6 +110,14 @@ Icon designed by Freepik from Flaticon
 
 ## Release Notes
 
+### 1.1.1
+
+ * Improve python path detection
+
+### 1.1.0
+
+ * Add support for multiple statements
+
 ### 1.0.0
 
  * Extend selection to full line when there is no selection
